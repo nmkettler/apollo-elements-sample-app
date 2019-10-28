@@ -4,7 +4,8 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag'
-import query from '../schemas/queries/todo-query.graphql'
+import query from '../schemas/queries/todo-query.graphql';
+import logger from '../../services/logger.js'
 
 // const protocol = host.includes('localhost') ? 'http' : 'https';
 // const uri = `${protocol}://${host}/graphql`;
@@ -19,7 +20,7 @@ class ConnectedElement extends ApolloQuery {
   render() {
     const { data, error, loading } = this;
     const { helloWorld = {} } = data || {}
-    
+    logger.info(data)
     return (
       html`
         ${data.agents.map(agent => (

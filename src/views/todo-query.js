@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag'
+import query from '../schemas/queries/todo-query.graphql'
 
 // const protocol = host.includes('localhost') ? 'http' : 'https';
 // const uri = `${protocol}://${host}/graphql`;
@@ -13,25 +14,6 @@ const cache = new InMemoryCache();
 
 // Create the Apollo Client
 const client = new ApolloClient({ cache, link });
-
-// Compute graphql documents statically for performance
-const query = gql`
-  query {
-    agents {
-      name
-      id,
-      age
-    }
-  }
-`;
-
-const childQuery = gql`
-  query {
-    agents {
-      agent_online
-    }
-  }
-`;
 
 class ConnectedElement extends ApolloQuery {
   render() {

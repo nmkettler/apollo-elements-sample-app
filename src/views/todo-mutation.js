@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloMutation } from '@apollo-elements/lit-apollo';
+import mutation from '../schemas/mutations/todo-mutation.graphql';
 
 const uri = `http://localhost:5000/graphql`;
 const link = new HttpLink({ uri });
@@ -11,13 +12,10 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({ cache, link });
 
-const mutation = gql`
-  mutation {
-    incrementAge {
-      incrementAge
-    }
-  }
-`;
+/*
+ * Example update function which reads a cached query result, merges
+ * it with the mutation result, and then writes it back to the cache.
+*/
 
 class MutatingElement extends ApolloMutation {
     constructor() {

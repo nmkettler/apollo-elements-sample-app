@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Agent 1",
+    "newAgentName": "Noah",
+    "age": "20",
+    "agent_online": false
+  },
+  {
+    "id": 2,
+    "name": "Agent 2",
+    "newAgentName": "Wussup",
+    "age": "21",
+    "agent_online": false
+  }
+]

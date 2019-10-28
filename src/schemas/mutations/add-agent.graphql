@@ -1,0 +1,6 @@
+mutation createUsers {
+  createUsers(input: [{username: "testtest"}, null]) {
+    id
+    username
+  }
+}

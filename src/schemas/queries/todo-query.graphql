@@ -3,6 +3,7 @@
     agents {
       name
       id,
-      age
+      age,
+      username
     }
   }

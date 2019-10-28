@@ -5,8 +5,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloMutation } from '@apollo-elements/lit-apollo';
 import mutation from '../schemas/mutations/todo-mutation.graphql';
+import { CREATE_POST_MUTATION } from '../schemas/mutations'
 
-const uri = `http://localhost:5000/graphql`;
+const uri = `http://localhost:4000`;
 const link = new HttpLink({ uri });
 const cache = new InMemoryCache();
 
@@ -21,16 +22,27 @@ class MutatingElement extends ApolloMutation {
     constructor() {
     super();
     this.client = client;
-    this.mutation = mutation;
+      this.mutation = CREATE_POST_MUTATION;
   }
 
+  handlePost (agentName, agentEmail) {
+    this.mutate({
+      variables: {
+        name: agentName,
+        email: agentEmail,
+      }
+    })
+  }
   
   render() {
     return html`
-      <loading-overlay ?active="${this.loading}"></loading-overlay>
-      <button ?hidden="${this.data}" @click="${this.mutate}">Mutate Me</button>
-      <div ?hidden="${!this.data}">wat</div>
-      `;
+      <button ?hidden="${this.data}" @click="${() => this.handlePost("noah name", "noah@ke.com")}">Mutate Me</button>
+    `
+    // return html`
+    //   <loading-overlay ?active="${this.loading}"></loading-overlay>
+    //   <button ?hidden="${this.data}" @click="${this.mutate}">Mutate Me</button>
+    //   <div ?hidden="${!this.data}">wat</div>
+    //   `;
   }
 }
 

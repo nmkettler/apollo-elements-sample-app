@@ -1,6 +1,10 @@
-mutation createUsers {
-  createUsers(input: [{username: "testtest"}, null]) {
+mutation createUser {
+  createUser(data: {
+    name: "Noah K",
+    age: 29,
+    email: "noahk@email.com"
+  }) {
     id
-    username
+    name
   }
 }

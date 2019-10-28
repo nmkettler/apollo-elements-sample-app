@@ -1,9 +1,7 @@
 
-  query {
-    agents {
-      name
-      id,
-      age,
-      username
-    }
+query {
+  users {
+    name,
+    age
   }
+}

@@ -1,0 +1,1 @@
+export { CREATE_POST_MUTATION } from './create-post.js'

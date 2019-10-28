@@ -8,7 +8,7 @@ import logger from '../../services/logger.js'
 
 // const protocol = host.includes('localhost') ? 'http' : 'https';
 // const uri = `${protocol}://${host}/graphql`;
-const uri = `http://localhost:5000/graphql`;
+const uri = `http://localhost:4000`;
 const link = new HttpLink({ uri });
 const cache = new InMemoryCache();
 
@@ -22,7 +22,7 @@ class ConnectedElement extends ApolloQuery {
     logger.info(data)
     return (
       html`
-        ${data.agents.map(agent => (
+        ${data.users.map(agent => (
           html`
             <ul>
               <li>${agent.name} is ${agent.age}</li>

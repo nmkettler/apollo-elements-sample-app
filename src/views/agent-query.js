@@ -3,11 +3,8 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag'
-// import query from '../schemas/queries/todo-query.graphql';
 import logger from '../../services/logger.js'
 import { POSTS_QUERY } from '../graphql';
-// const protocol = host.includes('localhost') ? 'http' : 'https';
-// const uri = `${protocol}://${host}/graphql`;
 const uri = `http://localhost:4000`;
 const link = new HttpLink({ uri });
 const cache = new InMemoryCache();
@@ -27,12 +24,21 @@ class ConnectedElement extends ApolloQuery {
     logger.info(data)
     return (
       html`
-        ${data.users.map(agent => (
-          html`
-            <ul>
-              <li>Agent Name: ${agent.name} <br> Agent Email: ${agent.email}</li>
-            </ul>`
-        ))}
+      <style>
+        .agent-list-wrapper {
+          float: left;
+        }
+      </style>
+        <div class='agent-list-wrapper'>
+          ${data.users.map(agent => (
+            html`
+              <ul>
+                <li>Agent Name: ${agent.name} <br> Agent Email: ${agent.email}</li>
+              </ul>`
+          ))}
+          <mutation-element></mutation-element>
+        </div>
+        <child-agent-element></child-agent-element>
       `
     );
   }

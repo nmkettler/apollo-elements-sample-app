@@ -3,17 +3,20 @@ const users = [
     id: '1',
     name: 'Andrew',
     email: 'andrew@example.com',
-    age: 27
+    age: 27,
+    agent_status: 'offline'
   },
   {
     id: '2',
     name: 'Sarah',
-    email: 'sarah@example.com'
+    email: 'sarah@example.com',
+    agent_status: 'online'
   },
   {
     id: '3',
     name: 'Mike',
-    email: 'mike@example.com'
+    email: 'mike@example.com',
+    agent_status: 'online'
   }
 ]
 

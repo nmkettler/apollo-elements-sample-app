@@ -1,11 +1,9 @@
-import gql from 'graphql-tag';
 import { render, html } from 'lit-html/lit-html';
-// import { LitElement, html } from 'lit-element';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { ApolloMutation } from '@apollo-elements/lit-apollo';
-// import mutation from '../schemas/mutations/todo-mutation.graphql';
+import { ApolloMutation, ApolloQuery } from '@apollo-elements/lit-apollo';
+import { POSTS_QUERY } from '../graphql';
 
 const uri = `http://localhost:4000`;
 const link = new HttpLink({ uri });
@@ -13,21 +11,33 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({ cache, link });
 
-/*
- * Example update function which reads a cached query result, merges
- * it with the mutation result, and then writes it back to the cache.
-*/
 
-class ChildAgentComponent extends ApolloMutation {
+class ChildAgentComponent extends ApolloQuery {
   constructor() {
     super();
     this.client = client;
+    this.query = POSTS_QUERY
   }
 
 
   render() {
+    const { data } = this;
+    
     return html`
-      <div>This is the child component</div>
+      <style>
+        .agent-status-wrapper {
+          float: right;
+        }
+      </style>
+      <div class='agent-status-wrapper'>
+        ${data.users.map(agent => (
+        html`
+            <ul>
+              <li>Agent Status: ${agent.name} is ${agent.agent_status}</li>
+            </ul>
+          `
+        ))}
+      </div>
     `
   }
 }

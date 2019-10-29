@@ -5,7 +5,8 @@ query {
   users {
     name,
     age,
-    email
+    email,
+    agent_status
   }
 }
 `

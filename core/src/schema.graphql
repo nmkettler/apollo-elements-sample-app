@@ -7,7 +7,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): User!
+  createAgent(data: CreateAgentInput!): User!
   deleteUser(id: ID!): User!
   updateUser(id: ID!, data: UpdateUserInput!): User!
   createPost(data: CreatePostInput!): Post!
@@ -23,7 +23,7 @@ type Subscription {
   post: PostSubscriptionPayload!
 }
 
-input CreateUserInput {
+input CreateAgentInput {
   name: String!
   email: String!
   age: Int

@@ -9,7 +9,7 @@
     "prod": "npm run webpack -- --env.mode production --env.presets serviceworker",
     "startClient": "npm run webpack-dev-server -- --env.mode development",
     "dev": "concurrently \"npm run startClient\" \"npm run devServer\" \"polymer serve --compile never\"",
-    "devServer": "nodemon custom_server/server.js --ext js,graphql --exec babel-node",
+    "devServer": "nodemon core/server.js --ext js,graphql --exec babel-node",
     "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker"
   },
   "repository": {

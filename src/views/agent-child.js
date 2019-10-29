@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 import { render, html } from 'lit-html/lit-html';
+// import { LitElement, html } from 'lit-element';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloMutation } from '@apollo-elements/lit-apollo';
-import mutation from '../schemas/mutations/add-agent.graphql';
-import { CREATE_POST_MUTATION } from '../schemas/mutations'
+// import mutation from '../schemas/mutations/todo-mutation.graphql';
 
 const uri = `http://localhost:4000`;
 const link = new HttpLink({ uri });
@@ -18,30 +18,18 @@ const client = new ApolloClient({ cache, link });
  * it with the mutation result, and then writes it back to the cache.
 */
 
-class MutatingElement extends ApolloMutation {
+class ChildAgentComponent extends ApolloMutation {
   constructor() {
     super();
     this.client = client;
-    this.mutation = CREATE_POST_MUTATION;
   }
 
-    createPost() {
-      let variables = {
-        $title: 'taco',
-        body: 'butt',
-        published: true,
-        authorId: 2
-      }
-      return variables
-    }
 
   render() {
     return html`
-      <loading-overlay ?active="${this.loading}"></loading-overlay>
-      <button ?hidden="${this.data}" @click="${this.mutate}">Add Agent</button>
-      <div ?hidden="${!this.data}">wat</div>
-      `;
+      <div>This is the child component</div>
+    `
   }
 }
 
-customElements.define('add-agent-element', MutatingElement);
+customElements.define('child-agent-element', ChildAgentComponent);

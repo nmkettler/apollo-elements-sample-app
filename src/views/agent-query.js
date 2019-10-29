@@ -3,9 +3,9 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag'
-import query from '../schemas/queries/todo-query.graphql';
+// import query from '../schemas/queries/todo-query.graphql';
 import logger from '../../services/logger.js'
-
+import { POSTS_QUERY } from '../graphql';
 // const protocol = host.includes('localhost') ? 'http' : 'https';
 // const uri = `${protocol}://${host}/graphql`;
 const uri = `http://localhost:4000`;
@@ -16,26 +16,25 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({ cache, link });
 
 class ConnectedElement extends ApolloQuery {
+  constructor() {
+    super();
+    this.client = client;
+    this.query = POSTS_QUERY;
+  }
+  
   render() {
     const { data, error, loading } = this;
-    const { helloWorld = {} } = data || {}
     logger.info(data)
     return (
       html`
         ${data.users.map(agent => (
           html`
             <ul>
-              <li>${agent.name} is ${agent.age}</li>
+              <li>Agent Name: ${agent.name} <br> Agent Email: ${agent.email}</li>
             </ul>`
         ))}
       `
     );
-  }
-
-  constructor() {
-    super();
-    this.client = client;
-    this.query = query;
   }
 };
 

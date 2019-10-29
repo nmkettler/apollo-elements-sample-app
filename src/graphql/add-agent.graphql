@@ -1,5 +1,5 @@
-mutation createUser {
-  createUser(data: {
+mutation createAgent {
+  createAgent(data: {
     name: "Noah K",
     age: 29,
     email: "noahk@email.com"
